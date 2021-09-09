@@ -7,13 +7,15 @@ import { CREATE_USER } from "./mutations/user";
 import "./App.css";
 
 const App = () => {
-  const { data, loading, error, refetch } = useQuery(GET_ALL_USERS);
-  const { data: oneUser, loading: loadingOneUser } = useQuery(GET_ONE_USER, {
+	// Graphql
+  const { data, loading, refetch } = useQuery(GET_ALL_USERS);
+  const { data: oneUser } = useQuery(GET_ONE_USER, {
     variables: {
       id: 1,
     },
   });
-  const [newUser] = useMutation(CREATE_USER);
+  const [createNewUser] = useMutation(CREATE_USER);
+	// State
   const [users, setUsers] = useState([]);
   const [username, setUsername] = useState("");
   const [age, setAge] = useState(0);
@@ -28,11 +30,11 @@ const App = () => {
 
   const addUser = (e: any) => {
     e.preventDefault();
-    newUser({
+    createNewUser({
       variables: {
         input: {
           username,
-          age,
+          age: Number(age),
         },
       },
     }).then(({ data }) => {
@@ -71,7 +73,7 @@ const App = () => {
       </form>
       <div>
         {users.map((user: any) => (
-          <div className="user">
+          <div className="user" key={user.id}>
             {user.id}. {user.username} {user.age}
           </div>
         ))}
