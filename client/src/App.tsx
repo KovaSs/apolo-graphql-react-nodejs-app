@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 import { GET_ALL_USERS, GET_ONE_USER } from "./query/user";
@@ -26,7 +26,7 @@ const App = () => {
     }
   }, [data]);
 
-  const addUser = (e) => {
+  const addUser = (e: any) => {
     e.preventDefault();
     newUser({
       variables: {
@@ -42,7 +42,7 @@ const App = () => {
     });
   };
 
-  const getAll = (e) => {
+  const getAll = (e: any) => {
     e.preventDefault();
     refetch();
   };
@@ -61,7 +61,7 @@ const App = () => {
         />
         <input
           value={age}
-          onChange={(e) => setAge(e.target.value)}
+          onChange={(e: any) => setAge(e.target.value)}
           type="number"
         />
         <div className="btns">
@@ -70,7 +70,7 @@ const App = () => {
         </div>
       </form>
       <div>
-        {users.map((user) => (
+        {users.map((user: any) => (
           <div className="user">
             {user.id}. {user.username} {user.age}
           </div>
