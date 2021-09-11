@@ -4,22 +4,19 @@ const cors = require('cors')
 
 const schema = require('./schema')
 
-const users = [{
-	id: 1,
-	username: "Vasya",
-	age: 25
-}]
+const users = [
+	{ id: 1, username: "Vasya", age: 25 }
+]
 
 const app = express()
 app.use(cors())
 
 const createUser = (input) => {
 	const id = Date.now()
-	return {
-		id,
-		...input
-	}
+	return { id, ...input }
 }
+
+// Root resolver
 const root = {
 	getAllUsers: () => {
 		return users
